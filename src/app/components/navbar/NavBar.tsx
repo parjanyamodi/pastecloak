@@ -10,75 +10,25 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
-import { useState } from "react";
+
 import ThemeSwitcher from "../utils/ThemeSwitcher";
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = ["N"];
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-        <NavbarBrand>
+    <div className="flex flex-row w-full items-center justify-between px-4 xs:px-8 sm:px-12 md:px-18 lg:px-24 xl:px-36 py-4">
+      <div className="flex flex-row">
+        <div>
           <p className="font-bold text-inherit">EPB</p>
-        </NavbarBrand>
-      </NavbarContent>
+        </div>
+      </div>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <ThemeSwitcher />
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="secondary" href="/" variant="flat">
-            New
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </Navbar>
+      <div className="flex flex-row gap-2">
+        <ThemeSwitcher />
+
+        <Button as={Link} color="secondary" href="/" variant="flat">
+          New
+        </Button>
+      </div>
+    </div>
   );
 }
