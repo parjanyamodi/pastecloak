@@ -1,6 +1,9 @@
 "use client";
+import { storeSecret } from "@/app/actions/secrets.action";
 import { Button, Checkbox, Input, Select, SelectItem } from "@nextui-org/react";
+import { useRef } from "react";
 import { TiTick } from "react-icons/ti";
+
 export default function CreateActions({
   content,
   setContent,
@@ -46,16 +49,18 @@ export default function CreateActions({
       time: 3.1536e19,
     },
   ];
+  const expirationTimeSelectRef =
+    useRef<HTMLSelectElement>() as React.RefObject<HTMLSelectElement>;
   return (
-    <div className="flex flex-col items-center gap-4 w-full">
-      <div className="flex flex-col items-center md:flex-row sm:justify-between w-full gap-4">
-        <div className="flex flex-col xs:flex-row w-full gap-4">
+    <div className="flex w-full flex-col items-center gap-4">
+      <div className="flex w-full flex-col items-center gap-4 sm:justify-between md:flex-row">
+        <div className="xs:flex-row flex w-full flex-col gap-4">
           <Button
             size="lg"
             color="danger"
             variant="flat"
             onPress={() => setContent("")}
-            className="w-full xs:w-fit"
+            className="xs:w-fit w-full"
           >
             Clear
           </Button>
@@ -64,7 +69,8 @@ export default function CreateActions({
             defaultSelectedKeys={[expirationTimes[0].time.toString()]}
             items={expirationTimes}
             label="Expires In"
-            className="w-full xs:min-w-[40%] "
+            className="xs:min-w-[40%] w-full "
+            ref={expirationTimeSelectRef}
           >
             {(expirationTime) => (
               <SelectItem key={expirationTime.time.toString()}>
@@ -73,10 +79,10 @@ export default function CreateActions({
             )}
           </Select>
         </div>
-        <div className="flex flex-col xs:flex-row w-full gap-4">
+        <div className="xs:flex-row flex w-full flex-col gap-4">
           <Input size="sm" label="Password" />
         </div>
-        <div className="flex flex-col 2xl:flex-row w-full gap-0.5 2xl:justify-around">
+        <div className="flex w-full flex-col gap-0.5 2xl:flex-row 2xl:justify-around">
           <Checkbox className="whitespace-pre">Burn after reading</Checkbox>
           <Checkbox className="whitespace-pre">
             Allow discussions in thread
@@ -87,7 +93,15 @@ export default function CreateActions({
         size="lg"
         color="success"
         variant="flat"
-        className="w-full xs:w-fit"
+        className="xs:w-fit w-full"
+        onPress={async () => {
+          console.log(
+            await storeSecret({
+              secretContent: content,
+              expires: Number(expirationTimeSelectRef.current?.value) || 60,
+            })
+          );
+        }}
       >
         Send
       </Button>

@@ -20,10 +20,10 @@ export default function ContentBox() {
     },
   ];
   return (
-    <div className="flex flex-col w-full items-start px-4 xs:px-8 sm:px-12 md:px-18 lg:px-24 xl:px-36 h-full">
+    <div className="xs:px-8 md:px-18 flex h-full w-full flex-col items-start px-4 sm:px-12 lg:px-24 xl:px-36">
       <Tabs aria-label="Dynamic tabs" size="lg" color="primary" items={tabs}>
         {(item) => (
-          <Tab key={item.id} className="w-full h-fit" title={item.label}>
+          <Tab key={item.id} className="h-fit w-full" title={item.label}>
             {item.content}
           </Tab>
         )}
