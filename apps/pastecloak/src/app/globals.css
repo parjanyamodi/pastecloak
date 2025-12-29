@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cyber Dark Theme - Emerald/Teal Accent */
+  --color-background: 220 20% 4%;
+  --color-foreground: 180 10% 90%;
+  --color-card: 220 20% 6%;
+  --color-card-foreground: 180 10% 90%;
+  --color-popover: 220 20% 8%;
+  --color-popover-foreground: 180 10% 90%;
+  --color-primary: 160 84% 39%;
+  --color-primary-foreground: 220 20% 4%;
+  --color-secondary: 220 20% 12%;
+  --color-secondary-foreground: 180 10% 90%;
+  --color-muted: 220 20% 15%;
+  --color-muted-foreground: 180 5% 55%;
+  --color-accent: 160 84% 39%;
+  --color-accent-foreground: 220 20% 4%;
+  --color-destructive: 0 70% 50%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 220 20% 18%;
+  --color-input: 220 20% 12%;
+  --color-ring: 160 84% 39%;
+
+  /* Border Radius */
+  --radius: 1rem;
+}
+
+/* Light mode - warm minimal */
+.light {
+  --color-background: 40 20% 98%;
+  --color-foreground: 220 20% 10%;
+  --color-card: 40 20% 100%;
+  --color-card-foreground: 220 20% 10%;
+  --color-popover: 40 20% 100%;
+  --color-popover-foreground: 220 20% 10%;
+  --color-primary: 160 84% 30%;
+  --color-primary-foreground: 40 20% 98%;
+  --color-secondary: 40 15% 94%;
+  --color-secondary-foreground: 220 20% 10%;
+  --color-muted: 40 15% 92%;
+  --color-muted-foreground: 220 10% 45%;
+  --color-accent: 160 84% 30%;
+  --color-accent-foreground: 40 20% 98%;
+  --color-destructive: 0 70% 50%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 40 15% 88%;
+  --color-input: 40 15% 92%;
+  --color-ring: 160 84% 30%;
+}
+
+/* Base Styles */
+* {
+  border-color: hsl(var(--color-border));
+}
+
+html {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+body {
+  background: linear-gradient(135deg, hsl(220 25% 3%) 0%, hsl(220 20% 8%) 50%, hsl(220 25% 3%) 100%);
+  color: hsl(var(--color-foreground));
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.light body {
+  background: linear-gradient(135deg, hsl(40 20% 98%) 0%, hsl(40 15% 95%) 50%, hsl(40 20% 98%) 100%);
+}
+
+/* Mesh Gradient Background */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.mesh-bg::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, hsl(160 100% 40% / 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, hsl(180 100% 30% / 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 60% 80%, hsl(200 100% 40% / 0.1) 0%, transparent 50%);
+  animation: mesh-move 30s ease-in-out infinite;
+}
+
+.light .mesh-bg::before {
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% 40%, hsl(160 80% 50% / 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, hsl(180 80% 40% / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 60% 80%, hsl(200 80% 50% / 0.08) 0%, transparent 50%);
+}
+
+/* Grid Pattern */
+.grid-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(hsl(160 100% 50% / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(160 100% 50% / 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+}
+
+.light .grid-pattern {
+  background-image: 
+    linear-gradient(hsl(160 100% 30% / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(160 100% 30% / 0.05) 1px, transparent 1px);
+}
+
+/* Glass Morphism */
+.glass {
+  background: hsl(220 20% 8% / 0.6);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid hsl(160 100% 50% / 0.1);
+}
+
+.light .glass {
+  background: hsl(40 20% 100% / 0.7);
+  border: 1px solid hsl(160 80% 30% / 0.15);
+}
+
+.glass-strong {
+  background: hsl(220 20% 6% / 0.8);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid hsl(160 100% 50% / 0.15);
+  box-shadow: 
+    0 0 0 1px hsl(160 100% 50% / 0.05),
+    0 20px 50px -20px hsl(160 100% 50% / 0.2),
+    inset 0 1px 0 hsl(160 100% 50% / 0.1);
+}
+
+.light .glass-strong {
+  background: hsl(40 20% 100% / 0.85);
+  border: 1px solid hsl(160 80% 30% / 0.2);
+  box-shadow: 
+    0 0 0 1px hsl(160 80% 30% / 0.08),
+    0 20px 50px -20px hsl(160 80% 30% / 0.15),
+    inset 0 1px 0 hsl(0 0% 100% / 0.8);
+}
+
+/* Glow Effects */
+.glow {
+  box-shadow: 
+    0 0 20px hsl(160 100% 50% / 0.3),
+    0 0 60px hsl(160 100% 50% / 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 30px hsl(160 100% 50% / 0.5);
+}
+
+/* Animations */
+@keyframes mesh-move {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(5%, 5%) scale(1.05);
+  }
+  50% {
+    transform: translate(-5%, 10%) scale(1.1);
+  }
+  75% {
+    transform: translate(10%, -5%) scale(1.05);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(220 20% 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(160 100% 40% / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(160 100% 40% / 0.5);
+}
+
+.light ::-webkit-scrollbar-track {
+  background: hsl(40 15% 95%);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: hsl(160 80% 30% / 0.3);
+}
