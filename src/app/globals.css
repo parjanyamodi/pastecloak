@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@theme {
+  /* Modern Dark Theme - Inspired by Linear/Vercel */
+  --color-background: 0 0% 3%;
+  --color-foreground: 0 0% 95%;
+  --color-card: 0 0% 6%;
+  --color-card-foreground: 0 0% 95%;
+  --color-popover: 0 0% 6%;
+  --color-popover-foreground: 0 0% 95%;
+  
+  /* Accent: Violet */
+  --color-primary: 262 83% 58%;
+  --color-primary-foreground: 0 0% 100%;
+  
+  --color-secondary: 0 0% 12%;
+  --color-secondary-foreground: 0 0% 95%;
+  --color-muted: 0 0% 12%;
+  --color-muted-foreground: 0 0% 55%;
+  --color-accent: 0 0% 15%;
+  --color-accent-foreground: 0 0% 95%;
+  --color-destructive: 0 72% 51%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 0 0% 14%;
+  --color-input: 0 0% 14%;
+  --color-ring: 262 83% 58%;
+
+  --radius: 0.75rem;
+}
+
+.light {
+  --color-background: 0 0% 100%;
+  --color-foreground: 0 0% 9%;
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 0 0% 9%;
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 0 0% 9%;
+  --color-primary: 262 83% 58%;
+  --color-primary-foreground: 0 0% 100%;
+  --color-secondary: 0 0% 96%;
+  --color-secondary-foreground: 0 0% 9%;
+  --color-muted: 0 0% 96%;
+  --color-muted-foreground: 0 0% 45%;
+  --color-accent: 0 0% 96%;
+  --color-accent-foreground: 0 0% 9%;
+  --color-destructive: 0 72% 51%;
+  --color-destructive-foreground: 0 0% 100%;
+  --color-border: 0 0% 90%;
+  --color-input: 0 0% 90%;
+  --color-ring: 262 83% 58%;
+}
+
+* {
+  border-color: hsl(var(--color-border));
+}
+
+html {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+body {
+  background: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gradient background */
+.gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsl(262 83% 58% / 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 100% 50%, hsl(280 80% 50% / 0.08), transparent),
+    radial-gradient(ellipse 60% 50% at 0% 100%, hsl(240 80% 50% / 0.08), transparent);
+}
+
+.light .gradient-bg {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsl(262 83% 58% / 0.08), transparent),
+    radial-gradient(ellipse 60% 50% at 100% 50%, hsl(280 80% 50% / 0.05), transparent);
+}
+
+/* Noise texture overlay */
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.light .noise {
+  opacity: 0.03;
+}
+
+/* Glass card */
+.glass-card {
+  background: hsl(0 0% 8% / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(0 0% 100% / 0.06);
+  border-radius: var(--radius);
+}
+
+.light .glass-card {
+  background: hsl(0 0% 100% / 0.8);
+  border: 1px solid hsl(0 0% 0% / 0.06);
+}
+
+/* Glow effect for primary elements */
+.glow {
+  box-shadow: 0 0 20px hsl(262 83% 58% / 0.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 30%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 40%);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 75%);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 0% 65%);
+}
+
+/* Selection */
+::selection {
+  background: hsl(262 83% 58% / 0.3);
+}
+
+/* Focus ring */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--color-background)), 0 0 0 4px hsl(262 83% 58%);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Disable transitions for elements that shouldn't animate */
+input, textarea, select, pre, code {
+  transition: none;
+}
